@@ -1,0 +1,31 @@
+---
+- hosts: localhost
+  gather_facts: false
+  vars_files:
+    - prepare/defaults/main.yml
+  tasks:
+
+    - name: Load role metadata
+      set_fact:
+        role_meta: "{{ lookup('file', 'prepare/meta/main.yml') | from_yaml }}"
+
+    - name: Get list of tasks
+      ansible.builtin.command: ansible-playbook playbook.yml -i inventory.yml --list-tasks
+      register: tasks_output
+      delegate_to: localhost
+      run_once: true
+
+    - name: Render README.md
+      ansible.builtin.template:
+        src: README.j2
+        dest: README.md
+      vars:
+        tasks_tags: "{{ tasks_output.stdout }}"
+        role_author: "{{ role_meta.galaxy_info.author }}"
+        role_description: "{{ role_meta.galaxy_info.description }}"
+        role_license: "{{ role_meta.galaxy_info.license }}"
+        defaults_vars: "{{ lookup('file', 'prepare/defaults/main.yml') | from_yaml }}"
+        var_descriptions:
+          prepare_common_packages: "Packages installed on all supported OS"
+          prepare_debian_packages: "Debian-specific packages"
+          prepare_rhel_packages: "RHEL/OracleLinux-specific packages"
