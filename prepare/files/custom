@@ -1,0 +1,25 @@
+# /etc/profile.d/custom.sh
+[[ $- != *i* ]] && return
+[[ -n "$SSH_ORIGINAL_COMMAND" ]] && return
+
+export EDITOR=vim
+export VISUAL=vim
+
+export HISTSIZE=10000
+export HISTFILESIZE=20000
+export HISTTIMEFORMAT='%F %T '
+shopt -s histappend
+
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+alias ll='ll -la'
+

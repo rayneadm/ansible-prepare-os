@@ -1,0 +1,14 @@
+---
+- name: Deploy root dotfiles
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "/root/{{ item.dest }}"
+    owner: root
+    group: root
+    mode: '0644'
+  loop:
+    - { src: ".bashrc", dest: ".bashrc" }
+    - { src: ".vimrc", dest: ".vimrc" }
+    - { src: ".tmux.conf", dest: ".tmux.conf" }
+  tags:
+    - root

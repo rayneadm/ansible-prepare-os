@@ -1,0 +1,24 @@
+---
+- name: Setting for root
+  ansible.builtin.import_tasks:
+    file: root.yml
+  tags:
+    - root
+
+- name: Setting for users
+  ansible.builtin.import_tasks:
+    file: users.yml
+  tags:
+    - user
+
+- name: Profile tings
+  ansible.builtin.import_tasks:
+    file: profile.yml
+  tags:
+    - profile
+
+- name: Install packages
+  ansible.builtin.import_tasks:
+    file: packages.yml
+  tags:
+    - packages

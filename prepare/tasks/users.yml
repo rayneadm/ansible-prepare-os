@@ -1,0 +1,56 @@
+---
+- name: Read list of home directories
+  ansible.builtin.find:
+    paths: /home
+    file_type: directory
+    depth: 1
+  register: users_dirs
+  tags:
+    - user
+
+- name: Deploy .bashrc to each user directory
+  ansible.builtin.copy:
+    src: .users.bashrc
+    dest: "{{ item.path }}/.bashrc"
+    owner: "{{ item.path | basename }}"
+    group: "{{ item.path | basename }}"
+    mode: '0644'
+  loop: "{{ users_dirs.files | selectattr('uid', 'defined') }}"
+  tags:
+    - user
+
+- name: Deploy .vimrc to each user directory
+  ansible.builtin.copy:
+    src: .vimrc
+    dest: "{{ item.path }}/.vimrc"
+    owner: "{{ item.path | basename }}"
+    group: "{{ item.path | basename }}"
+    mode: '0644'
+  loop: "{{ users_dirs.files | selectattr('uid', 'defined') }}"
+  tags:
+    - user
+
+- name: Deploy .tmux.conf to each user directory
+  ansible.builtin.copy:
+    src: .tmux.conf
+    dest: "{{ item.path }}/.tmux.conf"
+    owner: "{{ item.path | basename }}"
+    group: "{{ item.path | basename }}"
+    mode: '0644'
+  loop: "{{ users_dirs.files | selectattr('uid', 'defined') }}"
+  tags:
+    - user
+
+- name: Deploy skeleton files for new users
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "/etc/skel/{{ item.dest }}"
+    owner: root
+    group: root
+    mode: '0644'
+  loop:
+    - { src: '.users.bashrc', dest: '.bashrc' }
+    - { src: '.vimrc', dest: '.vimrc' }
+    - { src: '.tmux.conf', dest: '.tmux.conf' }
+  tags:
+    - user

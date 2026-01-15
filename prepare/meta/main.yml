@@ -1,0 +1,15 @@
+---
+galaxy_info:
+  author: "rayne (https://github.com/rayneadm)"
+  description: Ansible role for initial OS preparation
+  license: MIT
+  min_ansible_version: "2.9"
+  platforms:
+    - name: EL
+    - name: Debian
+  galaxy_tags:
+    - linux
+    - base
+    - system
+
+dependencies: []

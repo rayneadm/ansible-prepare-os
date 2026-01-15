@@ -1,0 +1,46 @@
+---
+# ============================================
+# Common settings
+# ============================================
+
+# @var prepare_common_packages
+# @type list
+# @description Packages installed on all supported OS
+prepare_common_packages:
+  - bash-completion
+  - vim
+  - mc
+  - tree
+  - git
+  - curl
+  - wget
+  - tar
+  - tcpdump
+  - jq
+  - nmap
+  - iptables
+
+# ============================================
+# Debian / Ubuntu
+# ============================================
+
+# @var prepare_debian_packages
+# @type list
+# @description Debian-specific packages
+prepare_debian_packages:
+  - dnsutils
+  - net-tools
+  - ipset
+  - ipset-persistent
+  - iptables-persistent
+  - netfilter-persistent
+
+# ============================================
+# RHEL / Oracle Linux
+# ============================================
+
+# @var prepare_rhel_packages
+# @type list
+# @description RHEL/OracleLinux-specific packages
+prepare_rhel_packages:
+  - bind-utils

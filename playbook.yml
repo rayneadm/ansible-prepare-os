@@ -1,0 +1,23 @@
+---
+- name: Check OS Type
+  hosts: all
+  become: true
+  become_method: ansible.builtin.su
+  become_user: root
+  gather_facts: true
+  tags:
+    - OS
+  tasks:
+    - name: Display OS Type
+      ansible.builtin.debug:
+        msg: "ОС: {{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_version'] }}"
+      tags:
+        - OS
+    - name: Display OS Family and VM ip address
+      ansible.builtin.debug:
+        msg: "ОС Family: {{ ansible_facts['distribution_file_variety'] }} IPv4: {{ ansible_facts['default_ipv4']['address'] }}"
+      tags:
+        - OS
+
+  roles:
+    - role: prepare

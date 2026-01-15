@@ -1,0 +1,13 @@
+---
+- name: Deploy global shell environment
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: '0644'
+  loop:
+    - { src: custom, dest: /etc/profile.d/custom.sh }
+    - { src: motd, dest: /etc/profile.d/motd.sh }
+  tags:
+    - profile
