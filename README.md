@@ -1,11 +1,32 @@
-# Ansible Role:  prepare 
+<!-- BEGIN AUTOGEN -->
+# prepare
 
+Ansible role for initial OS preparation
 
-## Description 
-Ansible role for initial OS preparation  
+**Author:** rayne (https://github.com/rayneadm)
 
+## Project structure of role `prepare`
 
-## Tasks description and tags
+```text
+prepare
+├── defaults
+│   └── main.yml
+├── files
+│   ├── custom
+│   └── motd
+├── meta
+│   └── main.yml
+└── tasks
+    ├── main.yml
+    ├── packages.yml
+    ├── profile.yml
+    ├── root.yml
+    └── users.yml
+
+5 directories, 9 files
+```
+
+## Ansible task list
 
 ```yaml
 
@@ -27,46 +48,78 @@ playbook: playbook.yml
       Display OS Type	TAGS: [OS]
       Display OS Family and VM ip address	TAGS: [OS]
 ```
-### To run use
 
+## Role tasks
+
+### main.yml
+
+- `Setting for root`
+- `Setting for users`
+- `Profile tings`
+- `Install packages`
+
+### packages.yml
+
+- **Установка набора пакетов для Debina, RHEL семейстава ОС**
+  - - Определить составв пакетов можно в `default/main.yml`
+  - - *запустить эту задачу с тегом* `-t packages`
+- `Update apt cache (Debian)`
+- `Install common packages`
+- `Install Debian packages`
+- `Install RHEL packages`
+
+### profile.yml
+
+- **Установка информативного motd сообщения при входе в систему**
+  - - **Taк же устанавливает переменные**
+  - - копирует motd.sh, custom.sh
+  - - *запустить эту задачу с тегом* `-t profile`
+- `Deploy global shell environment`
+
+### root.yml
+
+- **Установка dotfiles для профиля пользователя root**
+  - - копирует .bashrc, .vimrc, .tmux.conf
+  - - *запустить эту задачу с тегом* `-t root`
+- `Deploy root dotfiles`
+
+### users.yml
+
+- **Установка dotfiles для профилей существующих пользователей**
+  - - **Tак же копирует dotfiles в** `/etc/skel` **для перспективных пользователей**
+  - - копирует .bashrc, .vimrc, .tmux.conf
+  - - *запустить эту задачу с тегом* `-t user`
+- `Read list of home directories`
+- `Deploy .bashrc to each user directory`
+- `Deploy .vimrc to each user directory`
+- `Deploy .tmux.conf to each user directory`
+- `Deploy skeleton files for new users`
+
+
+## Default variables
+
+| Variable | Default |
+|---------|---------|
+| `prepare_common_packages` | `['bash-completion', 'vim', 'mc', 'tree', 'git', 'curl', 'wget', 'tar', 'tcpdump', 'jq', 'nmap', 'iptables']` |
+| `prepare_debian_packages` | `['dnsutils', 'net-tools', 'ipset', 'ipset-persistent', 'iptables-persistent', 'netfilter-persistent']` |
+| `prepare_rhel_packages` | `['bind-utils']` |
+
+## How to run
+
+### Run playbook
 ```bash
-ansible-playbook -i inventory.yml playbook.yml -K
+ansible-playbook -i inventory.yml playbook.yml
 ```
-
-### To run specific task use tag
-
+### Run specific task by tag
 ```bash
-ansible-playbook -i inventory.yml playbook.yml --tags profile -K
+ansible-playbook -i inventory.yml playbook.yml --tags TAG
 ```
-
-### To list all task use
-
+### List all tasks
 ```bash
-ansible-playbook -i inventory.yml playbook.yml --list-tasks 
+ansible-playbook -i inventory.yml playbook.yml --list-tasks
 ```
-
-### To run and watch detail info use 
-
+### Run with verbose output
 ```bash
-ansible-playbook -i inventory.yml playbook.yml -Dv -K
+ansible-playbook -i inventory.yml playbook.yml -Dv
 ```
-
-## Default Variables
-
-| Variable | Default | Description |
-|----------|---------|------------|
-| prepare_common_packages | ['bash-completion', 'vim', 'mc', 'tree', 'git', 'curl', 'wget', 'tar', 'tcpdump', 'jq', 'nmap', 'iptables'] | Packages installed on all supported OS |
-| prepare_debian_packages | ['dnsutils', 'net-tools', 'ipset', 'ipset-persistent', 'iptables-persistent', 'netfilter-persistent'] | Debian-specific packages |
-| prepare_rhel_packages | ['bind-utils'] | RHEL/OracleLinux-specific packages |
-
-
-## Quality
-
-![ansible-lint](https://img.shields.io/badge/ansible--lint-passed-brightgreen)
-![platforms](https://img.shields.io/badge/platforms-EL%20%7C%20Debian-blue)
-![license](https://img.shields.io/badge/license-MIT-green)
-
-
-**Author:** rayne (https://github.com/rayneadm)  
-
-[LICENSE MIT](LICENSE)  
+<!-- END AUTOGEN -->

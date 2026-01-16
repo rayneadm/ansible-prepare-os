@@ -1,4 +1,9 @@
 ---
+# @doc: Установка dotfiles для профилей существующих пользователей
+#  - **Tак же копирует dotfiles в** `/etc/skel` **для перспективных пользователей**
+#  - копирует .bashrc, .vimrc, .tmux.conf
+#  - *запустить эту задачу с тегом* `-t user`
+
 - name: Read list of home directories
   ansible.builtin.find:
     paths: /home

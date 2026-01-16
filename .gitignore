@@ -1,3 +1,4 @@
 inventory.yml
 README.j2
 generate_readme.yml
+generate_readme.py
