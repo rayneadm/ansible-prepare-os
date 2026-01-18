@@ -1,5 +1,5 @@
 # @doc: List all tasks of this role
-#  - This is the better place for include your task
+#  - This is the better place for include your jobs
 
 ---
 - name: Setting for root
