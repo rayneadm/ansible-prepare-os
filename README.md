@@ -73,7 +73,7 @@ playbook: playbook.yml
 ### profile.yml
 
 - **Install custom motd**
-  - - **Also install some varable**
+  - - Also install some varable
   - - *To run this task use tag* `-t profile`
 - `Deploy global shell environment`
 
