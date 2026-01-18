@@ -54,7 +54,7 @@ playbook: playbook.yml
 ### main.yml
 
 - **List all tasks of this role**
-  - - This is the better place for include your task
+  - - This is the better place for include your jobs
 - `Setting for root`
 - `Setting for users`
 - `Profile tings`
