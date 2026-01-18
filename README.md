@@ -65,6 +65,9 @@ playbook: playbook.yml
 - **Install packages for Debian and RHEL OS family**
   - - To change list of packages edit: `default/main.yml`
   - - *To run this task use tag* `-t packages`
+- **Установка набора пакетов для Debina, RHEL семейстава ОС**
+  - - Определить составв пакетов можно в `default/main.yml`
+  - - *запустить эту задачу с тегом* `-t packages`
 - `Update apt cache (Debian)`
 - `Install common packages`
 - `Install Debian packages`
@@ -75,6 +78,10 @@ playbook: playbook.yml
 - **Install custom motd**
   - - Also install some varables
   - - *To run this task use tag* `-t profile`
+- **Установка информативного motd сообщения при входе в систему**
+  - - **Taк же устанавливает переменные**
+  - - копирует motd.sh, custom.sh
+  - - *запустить эту задачу с тегом* `-t profile`
 - `Deploy global shell environment`
 
 ### root.yml
@@ -82,6 +89,9 @@ playbook: playbook.yml
 - **Install dotfiles to root profile**
   - - This tasj copy .bashrc, .vimrc, .tmux.conf
   - - *To run this task use tag* `-t root`
+- **Установка dotfiles для профиля пользователя root**
+  - - копирует .bashrc, .vimrc, .tmux.conf
+  - - *запустить эту задачу с тегом* `-t root`
 - `Deploy root dotfiles`
 
 ### users.yml
@@ -90,6 +100,10 @@ playbook: playbook.yml
   - - **Also copy dotfiles in ** `/etc/skel` **for users wich will be add later**
   - - Copy files: .bashrc, .vimrc, .tmux.conf
   - - *To run this task use tag* `-t user`
+- **Установка dotfiles для профилей существующих пользователей**
+  - - **Tак же копирует dotfiles в** `/etc/skel` **для перспективных пользователей**
+  - - копирует .bashrc, .vimrc, .tmux.conf
+  - - *запустить эту задачу с тегом* `-t user`
 - `Read list of home directories`
 - `Deploy .bashrc to each user directory`
 - `Deploy .vimrc to each user directory`
@@ -103,6 +117,7 @@ playbook: playbook.yml
 |---------|---------|
 | `prepare_common_packages` | `['bash-completion', 'vim', 'mc', 'tree', 'git', 'curl', 'wget', 'tar', 'tcpdump', 'jq', 'nmap', 'iptables']` |
 | `prepare_debian_packages` | `['sudo', 'dnsutils', 'net-tools', 'ipset', 'ipset-persistent', 'iptables-persistent', 'netfilter-persistent']` |
+| `prepare_debian_packages` | `['dnsutils', 'net-tools', 'ipset', 'ipset-persistent', 'iptables-persistent', 'netfilter-persistent']` |
 | `prepare_rhel_packages` | `['bind-utils']` |
 
 ## How to run

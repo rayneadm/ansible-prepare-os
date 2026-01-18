@@ -3,6 +3,11 @@
 #  - *To run this task use tag* `-t profile`
 
 ---
+# @doc: Установка информативного motd сообщения при входе в систему
+#  - **Taк же устанавливает переменные**
+#  - копирует motd.sh, custom.sh
+#  - *запустить эту задачу с тегом* `-t profile`
+
 - name: Deploy global shell environment
   ansible.builtin.copy:
     src: "{{ item.src }}"
