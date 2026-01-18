@@ -1,3 +1,7 @@
+# @doc: Install custom motd
+#  - **Also install some varable**
+#  - *To run this task use tag* `-t profile`
+
 ---
 - name: Deploy global shell environment
   ansible.builtin.copy:

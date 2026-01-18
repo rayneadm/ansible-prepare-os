@@ -1,4 +1,8 @@
 ---
+# @doc: Install dotfiles to root profile
+#  - This tasj copy .bashrc, .vimrc, .tmux.conf
+#  - *To run this task use tag* `-t root`
+
 - name: Deploy root dotfiles
   ansible.builtin.copy:
     src: "{{ item.src }}"

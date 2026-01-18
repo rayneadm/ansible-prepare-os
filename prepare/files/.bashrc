@@ -41,4 +41,5 @@ alias ll='ls -la'
 
 
 ## https://robotmoon.com/bash-prompt-generator/
-export PS1="\[$(tput setaf 34)\]\u\[$(tput setaf 40)\]@\[$(tput setaf 46)\]\h \[$(tput setaf 154)\]\w \[$(tput sgr0)\]# "
+#export PS1="\[$(tput setaf 34)\]\u\[$(tput setaf 40)\]@\[$(tput setaf 46)\]\h \[$(tput setaf 154)\]\w \[$(tput sgr0)\]# "
+export PS1="\[$(tput setaf 216)\]\u\[$(tput setaf 160)\]@\[$(tput setaf 202)\]\h \[$(tput setaf 131)\]\w \[$(tput sgr0)\]# "

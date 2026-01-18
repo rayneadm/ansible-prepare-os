@@ -1,11 +1,32 @@
-# Ansible Role:  prepare 
+<!-- BEGIN AUTOGEN -->
+# prepare
 
+Ansible role for initial OS preparation
 
-## Description 
-Ansible role for initial OS preparation  
+**Author:** rayne (https://github.com/rayneadm)
 
+## Project structure of role `prepare`
 
-## Tasks description and tags
+```text
+prepare
+├── defaults
+│   └── main.yml
+├── files
+│   ├── custom
+│   └── motd
+├── meta
+│   └── main.yml
+└── tasks
+    ├── main.yml
+    ├── packages.yml
+    ├── profile.yml
+    ├── root.yml
+    └── users.yml
+
+5 directories, 9 files
+```
+
+## Ansible task list
 
 ```yaml
 
@@ -27,46 +48,79 @@ playbook: playbook.yml
       Display OS Type	TAGS: [OS]
       Display OS Family and VM ip address	TAGS: [OS]
 ```
-### To run use
 
+## Role tasks
+
+### main.yml
+
+- **List all tasks of this role**
+  - - This is the better place for include your task
+- `Setting for root`
+- `Setting for users`
+- `Profile tings`
+- `Install packages`
+
+### packages.yml
+
+- **Install packages for Debian and RHEL OS family**
+  - - To change list of packages edit: `default/main.yml`
+  - - *To run this task use tag* `-t packages`
+- `Update apt cache (Debian)`
+- `Install common packages`
+- `Install Debian packages`
+- `Install RHEL packages`
+
+### profile.yml
+
+- **Install custom motd**
+  - - **Also install some varable**
+  - - *To run this task use tag* `-t profile`
+- `Deploy global shell environment`
+
+### root.yml
+
+- **Install dotfiles to root profile**
+  - - This tasj copy .bashrc, .vimrc, .tmux.conf
+  - - *To run this task use tag* `-t root`
+- `Deploy root dotfiles`
+
+### users.yml
+
+- **Install dotfiles for exist users profile**
+  - - **Also copy dotfiles in ** `/etc/skel` **for users wich will be add later**
+  - - Copy files: .bashrc, .vimrc, .tmux.conf
+  - - *To run this task use tag* `-t user`
+- `Read list of home directories`
+- `Deploy .bashrc to each user directory`
+- `Deploy .vimrc to each user directory`
+- `Deploy .tmux.conf to each user directory`
+- `Deploy skeleton files for new users`
+
+
+## Default variables
+
+| Variable | Default |
+|---------|---------|
+| `prepare_common_packages` | `['bash-completion', 'vim', 'mc', 'tree', 'git', 'curl', 'wget', 'tar', 'tcpdump', 'jq', 'nmap', 'iptables']` |
+| `prepare_debian_packages` | `['sudo', 'dnsutils', 'net-tools', 'ipset', 'ipset-persistent', 'iptables-persistent', 'netfilter-persistent']` |
+| `prepare_rhel_packages` | `['bind-utils']` |
+
+## How to run
+
+### Run playbook
 ```bash
-ansible-playbook -i inventory.yml playbook.yml -K
+ansible-playbook -i inventory.yml playbook.yml
 ```
-
-### To run specific task use tag
-
+### Run specific task by tag
 ```bash
-ansible-playbook -i inventory.yml playbook.yml --tags profile -K
+ansible-playbook -i inventory.yml playbook.yml --tags TAG
 ```
-
-### To list all task use
-
+### List all tasks
 ```bash
-ansible-playbook -i inventory.yml playbook.yml --list-tasks 
+ansible-playbook -i inventory.yml playbook.yml --list-tasks
 ```
-
-### To run and watch detail info use 
-
+### Run with verbose output
 ```bash
-ansible-playbook -i inventory.yml playbook.yml -Dv -K
+ansible-playbook -i inventory.yml playbook.yml -Dv
 ```
-
-## Default Variables
-
-| Variable | Default | Description |
-|----------|---------|------------|
-| prepare_common_packages | ['bash-completion', 'vim', 'mc', 'tree', 'git', 'curl', 'wget', 'tar', 'tcpdump', 'jq', 'nmap', 'iptables'] | Packages installed on all supported OS |
-| prepare_debian_packages | ['dnsutils', 'net-tools', 'ipset', 'ipset-persistent', 'iptables-persistent', 'netfilter-persistent'] | Debian-specific packages |
-| prepare_rhel_packages | ['bind-utils'] | RHEL/OracleLinux-specific packages |
-
-
-## Quality
-
-![ansible-lint](https://img.shields.io/badge/ansible--lint-passed-brightgreen)
-![platforms](https://img.shields.io/badge/platforms-EL%20%7C%20Debian-blue)
-![license](https://img.shields.io/badge/license-MIT-green)
-
-
-**Author:** rayne (https://github.com/rayneadm)  
-
-[LICENSE MIT](LICENSE)  
+<!-- END AUTOGEN -->

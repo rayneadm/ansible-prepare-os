@@ -28,6 +28,7 @@ prepare_common_packages:
 # @type list
 # @description Debian-specific packages
 prepare_debian_packages:
+  - sudo
   - dnsutils
   - net-tools
   - ipset
