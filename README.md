@@ -87,7 +87,7 @@ playbook: playbook.yml
 ### users.yml
 
 - **Install dotfiles for exist users profile**
-  - - **Also copy dotfiles in ** `/etc/skel` **for users wich will be add later**
+  - - Also copy dotfiles in `/etc/skel` for users wich will be add later
   - - Copy files: .bashrc, .vimrc, .tmux.conf
   - - *To run this task use tag* `-t user`
 - `Read list of home directories`
