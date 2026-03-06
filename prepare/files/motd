@@ -1,4 +1,5 @@
 #!/bin/bash
+[[ $- != *i* ]] && return
 if [[ -n "$SUDO_USER" ]] || [[ -n "$SU_FROM" ]] || [[ "$(id -un)" != "$USER" ]]; then
     return 0
 fi
